@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"github.com/smarthome-go/homescript/v2/homescript"
 )
 
@@ -34,6 +36,10 @@ func (self dummyExecutor) Ping(ip string, timeout float64) (bool, error) {
 
 func (self dummyExecutor) Notify(title string, description string, level homescript.NotificationLevel) error {
 	return nil
+}
+
+func (self dummyExecutor) Remind(title string, description string, urgency homescript.ReminderUrgency, dueDate time.Time) (uint, error) {
+	return 0, nil
 }
 
 func (self dummyExecutor) Log(title string, description string, level homescript.LogLevel) error {
