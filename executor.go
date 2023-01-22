@@ -82,3 +82,11 @@ func (self dummyExecutor) GetWeather() (homescript.Weather, error) {
 		Humidity:           87,
 	}, nil
 }
+
+func (self dummyExecutor) GetStorage(_ string) (*string, error) {
+	return nil, nil
+}
+
+func (self dummyExecutor) SetStorage(_ string, _ string) error {
+	return nil
+}
