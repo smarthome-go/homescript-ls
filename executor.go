@@ -8,6 +8,10 @@ import (
 
 type dummyExecutor struct{}
 
+func (self dummyExecutor) IsAnalyzer() bool {
+	return true
+}
+
 func (self dummyExecutor) ResolveModule(_ string) (string, bool, bool, error) {
 	return "", true, false, nil
 }
