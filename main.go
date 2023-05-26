@@ -2,10 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/smarthome-go/homescript/v2/homescript"
 	"github.com/tliron/glsp"
 	protocol "github.com/tliron/glsp/protocol_3_16"
@@ -83,9 +81,12 @@ func refreshDiagnosticsOfDocument(doc *document, notify glsp.NotifyFunc) {
 		make(map[string]homescript.Value),
 		make([]string, 0),
 		doc.Path,
+		doc.Path,
 	)
 
-	os.WriteFile("/tmp/hmsls.txt", []byte(spew.Sdump(results)), 0755)
+	// if err := os.WriteFile("/tmp/hmsls.txt", []byte(spew.Sdump(results)), 0755); err != nil {
+	// 	panic(err.Error())
+	// }
 
 	if len(results) == 0 {
 		diagnostics := []protocol.Diagnostic{}
@@ -162,6 +163,7 @@ func hover(context *glsp.Context, params *protocol.HoverParams) (*protocol.Hover
 		doc.Content,
 		make(map[string]homescript.Value),
 		make([]string, 0),
+		doc.Path,
 		doc.Path,
 	)
 

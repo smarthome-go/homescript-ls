@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"time"
 
 	"github.com/smarthome-go/homescript/v2/homescript"
@@ -12,8 +13,12 @@ func (self dummyExecutor) IsAnalyzer() bool {
 	return true
 }
 
-func (self dummyExecutor) ResolveModule(_ string) (string, bool, bool, error) {
-	return "", true, false, nil
+func (self dummyExecutor) ReadFile(string) (string, error) {
+	return "", errors.New("Cannot read a file here")
+}
+
+func (self dummyExecutor) ResolveModule(_ string) (string, string, bool, bool, error) {
+	return "", "", true, false, nil
 }
 
 func (self dummyExecutor) Sleep(sleepTime float64) {
@@ -57,7 +62,7 @@ func (self dummyExecutor) Exec(id string, args map[string]string) (homescript.Ex
 	}, nil
 }
 
-func (self dummyExecutor) Get(url string) (homescript.HttpResponse, error) {
+func (self dummyExecutor) Get(_url string) (homescript.HttpResponse, error) {
 	return homescript.HttpResponse{
 		Status:     "OK",
 		StatusCode: 200,
@@ -65,7 +70,7 @@ func (self dummyExecutor) Get(url string) (homescript.HttpResponse, error) {
 	}, nil
 }
 
-func (self dummyExecutor) Http(url string, method string, body string, headers map[string]string) (homescript.HttpResponse, error) {
+func (self dummyExecutor) Http(url string, method string, body string, headers map[string]string, _cookies map[string]string) (homescript.HttpResponse, error) {
 	return homescript.HttpResponse{
 		Status:     "Internal Server Error",
 		StatusCode: 500,
