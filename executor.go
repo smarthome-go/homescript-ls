@@ -17,8 +17,8 @@ func (self dummyExecutor) ReadFile(string) (string, error) {
 	return "", errors.New("Cannot read a file here")
 }
 
-func (self dummyExecutor) ResolveModule(_ string) (string, string, bool, bool, error) {
-	return "", "", true, false, nil
+func (self dummyExecutor) ResolveModule(_ string) (string, string, bool, bool, map[string]homescript.Value, error) {
+	return "", "", true, false, make(map[string]homescript.Value), nil
 }
 
 func (self dummyExecutor) Sleep(sleepTime float64) {
